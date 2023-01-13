@@ -9,9 +9,9 @@ import (
     "github.com/yann1989/logx"
 )
     logger := logx.NewLogger(
-    logx.WithRecordFile(logx.NewRecordFileWriter("./test.log", 10, 1, false)),
-    logx.WithStdout(),
-    logx.WithLevel(zapcore.DebugLevel))
+        logx.WithRecordFile(logx.NewRecordFileWriter("./test.log", 10, 1, false)),
+        logx.WithStdout(),
+        logx.WithLevel(zapcore.DebugLevel))
     defer logger.Sync()
     logger.Info("测试1")
     logger.Infof("测试: %d", 1)
