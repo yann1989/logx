@@ -37,6 +37,12 @@ func WithRecordFile(writer io.Writer) Option {
 	}
 }
 
+func WithHooks(hooks ...func(zapcore.Entry) error) Option {
+	return func(logger *Logger) {
+		logger.hooks = hooks
+	}
+}
+
 //NewRecordFileWriter
 //file 文件路径
 //maxSize 单个文件大小 单位MB

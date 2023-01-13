@@ -14,6 +14,7 @@ type Logger struct {
 	writers []io.Writer
 	format  string
 	encoder func(cfg zapcore.EncoderConfig) zapcore.Encoder
+	hooks   []func(zapcore.Entry) error
 }
 
 func NewLogger(options ...Option) *Logger {
@@ -33,6 +34,9 @@ func NewLogger(options ...Option) *Logger {
 	syncer := logger.getSyncer()
 	core := zapcore.NewCore(encoder, syncer, logger.l)
 	logger.Logger = zap.New(core, zap.AddCaller())
+	if len(logger.hooks) != 0 {
+		logger.Logger = logger.Logger.WithOptions(zap.Hooks(logger.hooks...))
+	}
 	logger.sugar = logger.Sugar().WithOptions(zap.AddCallerSkip(1))
 	return logger
 }
