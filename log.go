@@ -55,3 +55,10 @@ func (l *Logger) getSyncer() zapcore.WriteSyncer {
 	}
 	return zapcore.NewMultiWriteSyncer(syncers...)
 }
+
+func (l *Logger) Named(name string) *Logger {
+	return &Logger{
+		Logger: l.Logger.Named(name),
+		sugar:  l.sugar.Named(name),
+	}
+}
