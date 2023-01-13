@@ -55,9 +55,3 @@ func (l *Logger) getSyncer() zapcore.WriteSyncer {
 	}
 	return zapcore.NewMultiWriteSyncer(syncers...)
 }
-
-func WithLevel(l zapcore.Level) Option {
-	return func(logger *Logger) {
-		logger.l = l
-	}
-}

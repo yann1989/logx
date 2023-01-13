@@ -43,6 +43,12 @@ func WithHooks(hooks ...func(zapcore.Entry) error) Option {
 	}
 }
 
+func WithLevel(l zapcore.Level) Option {
+	return func(logger *Logger) {
+		logger.l = l
+	}
+}
+
 //NewRecordFileWriter
 //file 文件路径
 //maxSize 单个文件大小 单位MB
