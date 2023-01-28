@@ -11,6 +11,7 @@ type Logger struct {
 	*zap.Logger
 	sugar   *zap.SugaredLogger
 	l       zapcore.Level
+	sep     string
 	writers []io.Writer
 	format  string
 	encoder func(cfg zapcore.EncoderConfig) zapcore.Encoder
@@ -45,6 +46,7 @@ func (l *Logger) getEncoder() zapcore.Encoder {
 	encoderConfig := zap.NewDevelopmentEncoderConfig()
 	encoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout(l.format)
 	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
+	encoderConfig.ConsoleSeparator = l.sep
 	return l.encoder(encoderConfig)
 }
 

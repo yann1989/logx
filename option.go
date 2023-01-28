@@ -49,6 +49,12 @@ func WithLevel(l zapcore.Level) Option {
 	}
 }
 
+func WithSeparator(sep string) Option {
+	return func(logger *Logger) {
+		logger.sep = sep
+	}
+}
+
 //NewRecordFileWriter
 //file 文件路径
 //maxSize 单个文件大小 单位MB
