@@ -27,8 +27,8 @@ func NewLogger(options ...Option) *Logger {
 	for _, option := range options {
 		option(logger)
 	}
-	if len(logger.writers) == 0 {
-		logger.writers = append(logger.writers, os.Stdout)
+	if logger.writers == nil || len(logger.writers) == 0 {
+		logger.writers = []io.Writer{os.Stdout}
 	}
 
 	encoder := logger.getEncoder()
